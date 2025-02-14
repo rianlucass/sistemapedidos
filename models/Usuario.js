@@ -3,7 +3,9 @@ import Pessoa from "./Pessoa.js";
 
 const Usuario = banco.sequelize.define('usuario', {
     id:{
-        type: banco.Sequelize.INTEGER
+        type: banco.Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
     login:{
         type: banco.Sequelize.STRING(100)

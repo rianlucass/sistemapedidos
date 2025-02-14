@@ -1,42 +1,37 @@
-/*
 import passportLocal from 'passport-local'
 const localEstrategy = passportLocal.Strategy
 import Usuario from '../models/Usuario.js'
-import bcrypt from 'bcryptjs.js'
+import bcrypt from 'bcrypt'
 
-export default function(passport) {
+export default (passport)=>{
     passport.use(new localEstrategy(
-        {usernameField: 'username', passwordField: 'passwordField'},
-        (username, password, done)=>{
+        {usernameField: 'email', passwordField: 'password'},
+        async (email, password, done)=>{
             Usuario.findOne({
                 where:{
-                    login: username
+                    login: email
                 }
             }).then((usuario)=>{
                 if(!usuario){
-                    return done(null, false,{message: 'Usuário não encontrado!'})
+                    return done(null, false, {message: 'Usuario não encontrado'})
                 }
-
-                bcrypt.compare(password, usuario.senha,(erro, iguais)=>{
+                bcrypt.compare(password, usuario.senha, (erro, iguais)=>{
                     if(iguais){
                         return done(null, usuario)
-                    }else{
-                        return done(null, false, {message: 'Senha Incorreta!'})
+                    } else {
+                        return done(null, false, {message: 'Senha incorreta!'})
                     }
                 })
             })
         }
     ))
 
-    passport.serializerUser((usuario, done)=>{
+    passport.serializeUser((usuario, done)=>{
         done(null, usuario.id)
     })
-
-    passport.deserializerUser((id, done)=>{
+    passport.deserializeUser((id, done)=>{
         Usuario.findByPk(id).then((usuario)=>{
             done(null, usuario)
         })
     })
 }
-
-*/
