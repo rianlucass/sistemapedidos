@@ -1,0 +1,16 @@
+### Tabelas:
+
+Restaurante: id, nome, email, senha, categoria
+Cardápio: id, nome, preço, descrição, id_restaurante
+-----
+Pedido: id, usuario_id, restaurante_id, itens, status
+-----
+
+### ROTAS:
+
+/usuario/cadastro       → Exibir tela de cadastro
+/usuario/login          → Exibir tela de login
+/restaurante/cadastro   → Cadastro de restaurantes
+/restaurante/dashboard  → Gerenciar pedidos e cardápio
+/pedido/novopedido      → Criar novo pedido
+/pedido/meuspedidos     → Listar pedidos do usuário

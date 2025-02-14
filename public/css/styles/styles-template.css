@@ -1,0 +1,125 @@
+/* Estilos Gerais */
+body {
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2A373D; /* Fundo branco para o corpo */
+    color: #FFCFAB; /* Cor do texto escura para o conteúdo */
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px 50px;
+    background-color: #2A373D; /* Fundo escuro para o header */
+}
+
+.logo-container img.logo {
+    height: 150px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+    position: relative; /* Para posicionar o dropdown */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #FFCFAB; /* Cor clara para os links do header */
+    font-family: 'Montserrat', sans-serif; /* Fonte Montserrat para os links */
+    font-weight: 400;
+    font-size: 16px;
+    padding: 10px 15px;
+    display: block;
+}
+
+nav ul li a:hover {
+    color: #EC4A61; /* Cor de destaque ao passar o mouse */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none; /* Esconde o dropdown por padrão */
+    position: absolute;
+    top: 100%; /* Posiciona o dropdown abaixo do item do menu */
+    left: 0;
+    background-color: #EC4A61; /* Fundo escuro para o dropdown */
+    padding: 10px 0;
+    list-style: none;
+    margin: 0;
+    min-width: 150px; /* Largura mínima do dropdown */
+    z-index: 1000; /* Garante que o dropdown fique acima de outros elementos */
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu li a {
+    padding: 10px 20px;
+    color: #FFCFAB; /* Cor clara para os links do dropdown */
+    font-size: 14px;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #EC4A61; /* Cor de destaque ao passar o mouse */
+    color: #ffffff;
+}
+
+/* Mostrar o dropdown ao passar o mouse */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Main Content */
+main {
+    /*padding: 20px 50px;*/
+    /*background-color: #ffffff;*/ 
+    /* Fundo branco para o conteúdo */
+    color: #2A373D; /* Cor do texto para o conteúdo */
+}
+
+/* Footer */
+footer {
+    background-color: #2A373D; /* Fundo escuro para o footer */
+    padding: 20px 50px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    color: #FFCFAB; /* Cor clara para o texto do footer */
+}
+
+footer ul {
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+footer ul li {
+    margin: 0 10px;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: #FFCFAB; /* Cor clara para os links do footer */
+    font-size: 14px;
+}
+
+footer ul li a:hover {
+    color: #EC4A61; /* Cor de destaque ao passar o mouse */
+}
