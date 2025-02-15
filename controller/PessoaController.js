@@ -52,7 +52,7 @@ class PessoaController {
                         novoUsuario.senha = hash
                         Usuario.create(novoUsuario).then((()=>{
                             req.flash('sucess_msg','Usuario cadastrado com sucesso!')
-                            res.redirect('/')
+                            res.redirect('/usuario/login')
                         })).catch ((error)=>{
                             req.flash('error_msg', error.message)
                         })
