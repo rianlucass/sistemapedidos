@@ -9,8 +9,10 @@ import { fileURLToPath } from 'url'
 import session from 'express-session'
 import passport from 'passport'
 import flash from 'connect-flash'
-import auth from './config/autenticacao.js'
-auth(passport)
+import authUser from './config/authUser.js'
+import authRes from './config/authRes.js'
+authUser(passport)
+authRes(passport)
 
 app.use(session({
     secret: 'trabalhowebsistemapedidos',
@@ -26,6 +28,7 @@ app.use(function (req, res, next){
    res.locals.error_msg = req.flash("error_msg")
    res.locals.error = req.flash('error')
    res.locals.usuario = req.user || null
+   res.locals.user = req.isAuthenticated() ? req.user : null
    next()
 })
 

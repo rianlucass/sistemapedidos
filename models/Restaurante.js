@@ -45,6 +45,6 @@ const Restaurante = banco.sequelize.define('restaurantes',{
     },
 })
 
-Restaurante.sync({ alter: true });
+Restaurante.sync();
 
 export default Restaurante

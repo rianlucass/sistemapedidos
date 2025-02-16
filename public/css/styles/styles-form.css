@@ -33,6 +33,18 @@
     margin-bottom: 20px;
     font-size: 30px;
 }
+.login-form h1 {
+    font-family: 'Playfair Display', serif;
+    color: #2A373D;
+    margin-bottom: 20px;
+    font-size: 35px;
+}
+.login-form h3 {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
 
 .login-form p {
     font-family: 'Montserrat', sans-serif;

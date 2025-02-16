@@ -13,7 +13,7 @@ router.get('/restaurante/cadastrar',(req, res)=>{
 
 router.post('/restaurante/cadastrar', RestauranteController.cadastrar)
 router.post('/restaurante/login', RestauranteController.login)
-router.get('/restaurante/logout', RestauranteController.logout)
+router.get('/logout', RestauranteController.logout)
 
 router.get('/restaurante/dashboard', restauranteAutenticacao, (req, res) => {
     res.render('restaurante/dashboard', {restaurante: req.user})

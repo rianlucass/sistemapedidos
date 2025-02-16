@@ -1,7 +1,6 @@
-export default function usuarioAutenticacao(req, res, next){
-    if(req.isAuthenticated()){
+export default function verificaUsuario(req, res, next) {
+    if (req.isAuthenticated() && req.user) {
         return next()
     }
-
-    res.redirect('/usuario/login')
+    res.redirect('/usuario/home')
 }

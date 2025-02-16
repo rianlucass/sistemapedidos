@@ -1,4 +1,3 @@
-import { FOREIGNKEYS } from "sequelize/lib/query-types";
 import banco from "../config/banco.js";
 import Restaurante from '../models/Restaurante.js'
 

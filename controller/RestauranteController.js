@@ -47,16 +47,26 @@ class RestauranteController {
     } 
 
     login = (req, res, next) => {
-        passport.authenticate('local', {
-            successRedirect: 'dashboard',
-            failureRedirect: '/restaurante/login',
-            failureFlash: true
+        passport.authenticate('restaurante-local', (err, restaurante)=>{
+            if(err){
+                return next(err)
+            }
+            if(!restaurante){
+                return res.redirect('/restaurante/login')
+            }
+            
+            req.logIn(restaurante,(err)=>{
+                if(err){
+                    return next(err)
+                }
+                res.redirect('/restaurante/dashboard')
+            })
         })(req, res, next)
     }
 
     logout = (req, res, next) => {
         req.logout ((erro) =>{
-            res.redirect('/restaurante/login')
+            res.redirect('/')
         })
     }
 

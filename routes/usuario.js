@@ -13,9 +13,9 @@ router.get('/usuario/cadastrar',(req, res)=>{
 router.post('/usuario/cadastrar', PessoaController.cadastrar)
 
 router.post('/usuario/login', UsuarioController.login)
-router.get('/usuario/logout', UsuarioController.logout)
+router.get('/logout', UsuarioController.logout)
 
-router.get('/usuario/home', usuarioAutenticacao,(req, res)=>{
+router.get('/usuario/home', usuarioAutenticacao,(req, res) => {
     res.render('usuario/home', {usuario: req.user})
 })
 
