@@ -31,10 +31,16 @@
     font-family: 'Playfair Display', serif;
     color: #2A373D;
     margin-bottom: 20px;
-    font-size: 24px;
+    font-size: 30px;
 }
 
-/* Estilo dos grupos de input */
+.login-form p {
+    font-family: 'Montserrat', sans-serif;
+    color: #2A373D;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
 .form-group {
     margin-bottom: 20px;
     text-align: left;
@@ -66,7 +72,7 @@
 
 /* Estilo do botão de login */
 .login-button {
-    width: 95%;
+    width: 80%;
     padding: 12px;
     background-color: #EC4A61;
     color: #ffffff;
@@ -98,4 +104,18 @@
 
 .register-link a:hover {
     text-decoration: underline;
+}
+
+.form-group textarea {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.form-group textarea:focus {
+    border-color: #EC4A61;
 }

@@ -4,7 +4,7 @@ import { Op } from "sequelize";
 import bcrypt from 'bcrypt'
 
 class PessoaController {
-    index = (req, res) =>{
+    /*index = (req, res) =>{
         Pessoa.findAll({
             where:{
                 status: 1
@@ -13,7 +13,7 @@ class PessoaController {
         }).then((pessoas)=>{
             res.render('usuario/index', {pessoas: pessoas})
         })
-    }
+    }*/
 
     cadastrar = async (req, res)=>{
         let pessoa = await Pessoa.findOne({
@@ -47,7 +47,7 @@ class PessoaController {
                     bcrypt.hash(novoUsuario.senha, salt, (err, hash)=>{
                         if(erro) {
                             req.flash('error_msg', 'Erro ao salvar o usuário!')
-                            res.redirect('usuario/login')
+                            res.redirect('usuario/cadastrar')
                         }
                         novoUsuario.senha = hash
                         Usuario.create(novoUsuario).then((()=>{

@@ -1,4 +1,3 @@
-import Usuario from "../models/Usuario.js";
 import passport from "passport";
 
 class UsuarioController {

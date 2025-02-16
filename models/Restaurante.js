@@ -24,11 +24,27 @@ const Restaurante = banco.sequelize.define('restaurantes',{
         allowNull: false,
         unique: true
     },
+    descricao: {
+        type: banco.Sequelize.TEXT,
+        allowNull: false
+    },
+    banner: {
+        type: banco.Sequelize.STRING,
+    },
+    logo: {
+        type: banco.Sequelize.STRING,
+    },
+    login:{
+        type: banco.Sequelize.STRING(100)
+    },
     status:{
         type: banco.Sequelize.INTEGER,
-    }
+    },
+    categoria:{
+        type: banco.Sequelize.INTEGER
+    },
 })
 
-Restaurante.sync()
+Restaurante.sync({ alter: true });
 
 export default Restaurante

@@ -44,6 +44,9 @@ app.use(bodyParser.json())
 import usuario from './routes/usuario.js'
 app.use('/', usuario)
 
+import restaurante from './routes/restaurante.js'
+app.use('/', restaurante)
+
 app.listen(3020,()=>{
     console.log('Servidor rodando em http://localhost:3020')
 })
