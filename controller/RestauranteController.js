@@ -4,6 +4,11 @@ import bcrypt from 'bcrypt'
 import passport from 'passport'
 
 class RestauranteController {
+    /*index = async (req, res)=>{
+        const restaurante = await Restaurante.findAll()
+        res.render('restaurante/index', {restaurante: restaurante})
+    }*/
+
     cadastrar = async (req, res)=>{
         let restaurante = await Restaurante.findOne({
             where:{
@@ -47,11 +52,12 @@ class RestauranteController {
     } 
 
     login = (req, res, next) => {
-        passport.authenticate('restaurante-local', (err, restaurante)=>{
+        passport.authenticate('restaurante-local', (err, restaurante, info)=>{
             if(err){
                 return next(err)
             }
             if(!restaurante){
+                req.flash("error_msg", "Credenciais inválidas.");
                 return res.redirect('/restaurante/login')
             }
             

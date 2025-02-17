@@ -4,7 +4,7 @@ import Restaurante from '../models/Restaurante.js'
 const Cardapio = banco.sequelize.define('cardapios', {
     id:{
         type: banco.Sequelize.INTEGER,
-        autoIncremente: true,
+        autoIncrement: true,
         primaryKey: true
     },
     nome:{
@@ -26,9 +26,11 @@ const Cardapio = banco.sequelize.define('cardapios', {
 })
 
 Cardapio.belongsTo(Restaurante,{
-    foreingKey: 'id_restaurante',
+    foreingKey: 'restaurante_id',
     constraint: true,
     as: 'restaurante'
 })
+
+Cardapio.sync()
 
 export default Cardapio

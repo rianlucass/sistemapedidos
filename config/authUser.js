@@ -25,16 +25,4 @@ export default (passport)=>{
             })
         }
     ))
-
-    passport.serializeUser((usuario, done)=>{
-        done(null, usuario.id)
-    })
-    passport.deserializeUser((id, done)=>{
-        Usuario.findByPk(id).then((usuario) => {
-            if (!usuario) {
-                return done(null, false)
-            }
-            done(null, usuario)
-        }).catch((err) => done(err, null))
-    })
 }

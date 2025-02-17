@@ -15,3 +15,20 @@ Pedido: id, usuario_id, restaurante_id, itens, status
 /restaurante/dashboard  → Gerenciar pedidos e cardápio
 /pedido/novopedido      → Criar novo pedido
 /pedido/meuspedidos     → Listar pedidos do usuário
+
+lista de pedidos
+-----------------------------------------------------
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Pedido #12345
+                            <span class="badge bg-success">Entregue</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Pedido #12346
+                            <span class="badge bg-warning text-dark">Em preparo</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Pedido #12347
+                            <span class="badge bg-danger">Cancelado</span>
+                        </li>
+                    </ul>

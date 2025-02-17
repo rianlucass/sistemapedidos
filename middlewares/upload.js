@@ -11,13 +11,13 @@ const storage = multer.diskStorage({
 })
 
 const fileFilter = (req, file, cb)=>{
-    if(file.mimetype.starsWith('image/')) {
+    if(file.mimetype.startsWith('image/')) {
         cb(null, true)
     } else {
         cb(new Error('Arquivo Invalido! Envie uma imagem.'), false)
     }
 }
 
-const upload = multer({storage: fileFilter})
+const upload = multer({storage, fileFilter})
 
 export default upload

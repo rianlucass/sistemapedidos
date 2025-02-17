@@ -13,6 +13,7 @@ import authUser from './config/authUser.js'
 import authRes from './config/authRes.js'
 authUser(passport)
 authRes(passport)
+authConfig(passport)
 
 app.use(session({
     secret: 'trabalhowebsistemapedidos',
@@ -48,7 +49,10 @@ import usuario from './routes/usuario.js'
 app.use('/', usuario)
 
 import restaurante from './routes/restaurante.js'
+import authConfig from './config/authConfig.js'
 app.use('/', restaurante)
+
+app.use('/uploads', express.static(path.join('public/uploads')))
 
 app.listen(3020,()=>{
     console.log('Servidor rodando em http://localhost:3020')

@@ -25,16 +25,4 @@ export default (passport)=>{
             })
         }
     ))
-
-    passport.serializeUser((restaurante, done)=>{
-        done(null, restaurante.id)
-    })
-    passport.deserializeUser((id, done)=>{
-        Restaurante.findByPk(id).then((restaurante)=>{
-            if(!restaurante){
-                return done(null, false)
-            }
-            done(null, restaurante)
-        }).catch((err) => done(err, null))
-    })
 }

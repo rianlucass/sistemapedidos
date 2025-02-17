@@ -2,6 +2,8 @@ import express from 'express'
 const router = express.Router()
 import RestauranteController from '../controller/RestauranteController.js'
 import restauranteAutenticacao from '../middlewares/restauranteAutenticacao.js'
+import CardapioController from '../controller/CardapioController.js'
+import upload from '../middlewares/upload.js'
 
 router.get('/restaurante/login', (req, res)=>{
     res.render('restaurante/login')
@@ -18,5 +20,12 @@ router.get('/logout', RestauranteController.logout)
 router.get('/restaurante/dashboard', restauranteAutenticacao, (req, res) => {
     res.render('restaurante/dashboard', {restaurante: req.user})
 })
+
+router.get('/restaurante/cardapio', (req, res) => {
+    res.render('restaurante/cardapio')
+})
+router.post('/restaurante/cardapio/salvar',upload.single('imagem'), CardapioController.salvar)
+router.get('/restaurante/cardapio', CardapioController.index)
+
 
 export default router
