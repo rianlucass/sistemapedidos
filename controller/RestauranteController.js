@@ -36,12 +36,12 @@ class RestauranteController {
             bcrypt.genSalt(10, (erro, salt)=>{
                 bcrypt.hash(novoRestaurante.senha, salt, (err, hash)=>{
                     if(err) {
-                        req.flash('error_msg', 'Erro ao salvar o restaurante!')
+                        req.flash('error_msg', 'Erro ao criar conta do restaurante!')
                         res.redirect('/restaurante/cadastrar')
                     }
                     novoRestaurante.senha = hash
                     Restaurante.create(novoRestaurante).then((()=>{
-                        req.flash('success_msg', 'Restaurante salvo com sucesso!')
+                        req.flash('success_msg', 'Conta do restaurante criada com sucesso!')
                         res.redirect('/restaurante/login')
                     })).catch((error)=>{
                         req.flash('erro_msg', error.message)
@@ -57,7 +57,7 @@ class RestauranteController {
                 return next(err)
             }
             if(!restaurante){
-                req.flash("error_msg", "Credenciais inválidas.");
+                req.flash("error_msg", "Credenciais inválidas.")
                 return res.redirect('/restaurante/login')
             }
             

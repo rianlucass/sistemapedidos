@@ -22,10 +22,21 @@ router.get('/restaurante/dashboard', restauranteAutenticacao, (req, res) => {
 })
 
 router.get('/restaurante/cardapio', (req, res) => {
-    res.render('restaurante/cardapio')
+    if (!req.user) {
+        req.flash('error_msg', 'Você precisa estar logado para acessar esta página')
+        return res.redirect('restaurante/login')
+    }
+    CardapioController.index(req, res)
 })
 router.post('/restaurante/cardapio/salvar',upload.single('imagem'), CardapioController.salvar)
-router.get('/restaurante/cardapio', CardapioController.index)
+
+router.get('/restaurante/perfil', (req, res) => {
+    if (!req.user) {
+        req.flash('error_msg', 'Você precisa estar logado para acessar esta página')
+        return res.redirect('restaurante/login')
+    }
+    res.render('restaurante/perfil')
+})
 
 
 export default router

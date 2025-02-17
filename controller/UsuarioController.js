@@ -7,6 +7,7 @@ class UsuarioController {
                 return next(err)
             }
             if (!usuario){ 
+                //req.flash("error_msg", "Credenciais inválidas.")
                 return res.redirect('/usuario/login')
             }
     

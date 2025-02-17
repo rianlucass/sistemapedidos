@@ -26,7 +26,7 @@ const Cardapio = banco.sequelize.define('cardapios', {
 })
 
 Cardapio.belongsTo(Restaurante,{
-    foreingKey: 'restaurante_id',
+    foreignKey: 'restaurante_id',
     constraint: true,
     as: 'restaurante'
 })

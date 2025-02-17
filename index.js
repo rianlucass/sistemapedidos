@@ -52,7 +52,7 @@ import restaurante from './routes/restaurante.js'
 import authConfig from './config/authConfig.js'
 app.use('/', restaurante)
 
-app.use('/uploads', express.static(path.join('public/uploads')))
+app.use('/uploads', express.static(path.join('uploads')))
 
 app.listen(3020,()=>{
     console.log('Servidor rodando em http://localhost:3020')

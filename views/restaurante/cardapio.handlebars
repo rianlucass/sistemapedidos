@@ -21,14 +21,14 @@
                 <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*">
             </div>
 
-            <input type="hidden" name="id" value="{{restaurante.id}}">
+            <input type="hidden" name="id_restaurante" value="{{restaurante.id}}">
 
             <button type="submit" class="btn btn-primary">Adicionar</button>
         </form>
     </div>
     
     <div class="mt-5">
-        <h2 class="mb-3">Pratos Cadastrados</h2>
+        <h2 class="mb-3">Cardapio</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -40,9 +40,9 @@
                 </tr>
             </thead>
             <tbody>
-                {{#each prato}}
+                {{#each pratos}}
                 <tr>
-                    <td><img src="/uploads/restaurante/{{imagem}}" alt="{{nome}}" class="img-thumbnail" style="width: 80px;"></td>
+                    <td><img src="{{imagem}}" alt="{{nome}}" class="img-thumbnail" style="width: 80px;"></td>
                     <td>{{nome}}</td>
                     <td>{{descricao}}</td>
                     <td>R$ {{preco}}</td>
