@@ -1,7 +1,8 @@
 <div class="container mt-5">
     <h1 class="text-center">{{restaurante.nome}}</h1>
     <p class="text-center">{{restaurante.descricao}}</p>
-
+    <!-- Div para armazenar os dados do usuário -->
+    <div id="user-data" data-usuario-id="{{usuario.id}}" data-nome-usuario="{{pessoa.nome}}"></div>
     <div class="row">
         {{#each cardapio}}
         <div class="col-md-4">
@@ -24,9 +25,17 @@
     </div>
 </div>
 
+<!-- Campo de localização simples -->
+<div id="campo-localizacao" style="display: none;" class="container mt-3">
+    <label for="localizacaoInput">Localização de entrega:</label>
+    <input type="text" id="localizacaoInput" class="form-control" placeholder="Digite a localização de entrega">
+    <button id="confirmar-compra" class="btn btn-primary mt-2">Confirmar Compra</button>
+</div>
+
 <script>
     let carrinho = [];
 
+    // Adiciona itens ao carrinho
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', () => {
             const id = button.dataset.id;
@@ -45,6 +54,7 @@
         });
     });
 
+    // Atualiza o carrinho na interface
     function atualizarCarrinho() {
         const listaCarrinho = document.getElementById("lista-carrinho");
         const totalCarrinho = document.getElementById("total-carrinho");
@@ -75,8 +85,8 @@
             document.getElementById("finalizar-compra").style.display = "none";
         }
 
+        // Botões para aumentar/diminuir quantidade
         document.querySelectorAll(".menos").forEach(btn => {
-            btn.removeEventListener("click", () => {});
             btn.addEventListener("click", () => {
                 const index = btn.dataset.index;
                 if (carrinho[index].quantidade > 1) {
@@ -89,7 +99,6 @@
         });
 
         document.querySelectorAll(".mais").forEach(btn => {
-            btn.removeEventListener("click", () => {});
             btn.addEventListener("click", () => {
                 const index = btn.dataset.index;
                 carrinho[index].quantidade++;
@@ -98,9 +107,26 @@
         });
     }
 
-    document.getElementById("finalizar-compra").addEventListener("click", async () => {
+    // Exibe o campo de localização ao clicar em "Finalizar Compra"
+    document.getElementById("finalizar-compra").addEventListener("click", () => {
+        document.getElementById("campo-localizacao").style.display = "block";
+    });
+
+    // Captura os dados do usuário
+    const userData = document.getElementById("user-data");
+    const usuarioId = userData.dataset.usuarioId; // ID do usuário
+    const nomeUsuario = userData.dataset.nomeUsuario; // Nome do cliente
+
+    // Envia os dados para o backend ao confirmar a compra
+    document.getElementById("confirmar-compra").addEventListener("click", async () => {
+        const localizacao = document.getElementById("localizacaoInput").value;
+
+        if (!localizacao) {
+            alert("Por favor, insira a localização de entrega.");
+            return;
+        }
+
         const restaurante_id = carrinho[0]?.restaurante_id;
-        const nomeUsuario = "Rian";
         const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
 
         if (!restaurante_id || carrinho.length === 0) {
@@ -114,8 +140,9 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     restaurante_id,
-                    usuario_id: 1,
-                    nomeUsuario,
+                    usuario_id: usuarioId,
+                    nome_cliente: nomeUsuario, // Nome do cliente
+                    endereco_cliente: localizacao, // Endereço de entrega
                     total,
                     itens: carrinho
                 })
@@ -127,6 +154,8 @@
                 alert(data.message);
                 carrinho = [];
                 atualizarCarrinho();
+                document.getElementById("campo-localizacao").style.display = "none";
+                document.getElementById("localizacaoInput").value = "";
             } else {
                 alert(`Erro: ${data.message}`);
             }

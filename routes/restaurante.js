@@ -4,6 +4,7 @@ import RestauranteController from '../controller/RestauranteController.js'
 import restauranteAutenticacao from '../middlewares/restauranteAutenticacao.js'
 import CardapioController from '../controller/CardapioController.js'
 import upload from '../middlewares/upload.js'
+import PedidoController from '../controller/PedidoController.js'
 
 router.get('/restaurante/login', (req, res)=>{
     res.render('restaurante/login')
@@ -14,7 +15,9 @@ router.get('/restaurante/cadastrar',(req, res)=>{
 })
 
 router.post('/restaurante/cadastrar', RestauranteController.cadastrar)
+
 router.post('/restaurante/login', RestauranteController.login)
+
 router.get('/logout', RestauranteController.logout)
 
 router.get('/restaurante/dashboard', restauranteAutenticacao, (req, res) => {
@@ -27,6 +30,7 @@ router.get('/restaurante/cardapio', (req, res) => {
     }
     CardapioController.index(req, res)
 })
+
 router.post('/restaurante/cardapio/salvar',upload.single('imagem'), CardapioController.salvar)
 
 router.get('/restaurante/perfil', (req, res) => {
@@ -35,5 +39,11 @@ router.get('/restaurante/perfil', (req, res) => {
     }
     res.render('restaurante/perfil')
 })
+
+router.post('/restaurante/cardapio/editar/:id', CardapioController.editar)
+
+router.post('/restaurante/cardapio/excluir/:id', CardapioController.excluir)
+
+router.get('/usuario/pedidos/:usuario_id', PedidoController.listarPedidosPorUsuario)
 
 export default router

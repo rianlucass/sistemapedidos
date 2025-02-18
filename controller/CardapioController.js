@@ -43,6 +43,37 @@ class CardapioController {
             res.redirect('/restaurante/cardapio')
         })
     }
+
+    editar = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { nome, descricao, preco } = req.body;
+            await Cardapio.update(
+                { nome, descricao, preco },
+                { where: { id } }
+            )
+            req.flash('success_msg', 'Prato atualizado com sucesso!')
+            res.redirect('/restaurante/cardapio')
+        } catch (error) {
+            req.flash('error_msg', 'Erro ao atualizar prato.')
+            res.redirect('/restaurante/cardapio')
+        }
+    }
+
+    async excluir(req, res) {
+        try {
+            const { id } = req.params;
+            
+            await Cardapio.destroy({ where: { id } });
+
+            req.flash('success_msg', 'Prato excluído com sucesso!');
+            res.redirect('/restaurante/cardapio');
+        } catch (error) {
+            console.error(error);
+            req.flash('error_msg', 'Erro ao excluir prato.');
+            res.redirect('/restaurante/cardapio');
+        }
+    }
 }
 
 export default new CardapioController()

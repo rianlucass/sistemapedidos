@@ -16,6 +16,14 @@ const Pedido = banco.sequelize.define('pedidos', {
         allowNull: false,
         references: { model: 'usuarios', key: 'id' }
     },
+    nome_cliente: {
+        type: banco.Sequelize.STRING,
+        allowNull: false
+    },
+    endereco_cliente: {
+        type: banco.Sequelize.STRING,
+        allowNull: false
+    },
     status: {
         type: banco.Sequelize.STRING,
         defaultValue: "Pendente"
