@@ -1,1 +1,19 @@
-<h1>home do usuario</h1>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Restaurantes disponiveis</h2>
+    <div class="row">
+        {{#each restaurantes}}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-white">
+                    <img src="{{logo}}" alt="Logo de {{nome}}" class="img-fluid rounded" style="max-width: 100px; height: 100px; object-fit: cover;">
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{nome}}</h5>
+                    <p class="card-text">{{descricao}}</p>
+                    <a href="/restaurante/{{id}}" class="register-link">Ver Cardápio</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

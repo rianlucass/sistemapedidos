@@ -16,7 +16,7 @@ router.post('/usuario/login', UsuarioController.login)
 router.get('/logout', UsuarioController.logout)
 
 router.get('/usuario/home', usuarioAutenticacao,(req, res) => {
-    res.render('usuario/home', {usuario: req.user})
+    UsuarioController.listarRestaurantes(req, res)
 })
 
 export default router

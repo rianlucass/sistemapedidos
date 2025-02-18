@@ -45,6 +45,12 @@
     margin-bottom: 20px;
     font-size: 30px;
 }
+.login-form h5 {
+    font-family: 'Montserrat', sans-serif;
+    color: #2A373D;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
 
 .login-form p {
     font-family: 'Montserrat', sans-serif;

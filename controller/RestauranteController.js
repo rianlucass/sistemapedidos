@@ -57,7 +57,7 @@ class RestauranteController {
                 return next(err)
             }
             if(!restaurante){
-                req.flash("error_msg", "Credenciais inválidas.")
+                req.flash("error_msg", info.message || "Credenciais inválidas.")
                 return res.redirect('/restaurante/login')
             }
             
