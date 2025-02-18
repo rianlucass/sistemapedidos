@@ -1,0 +1,138 @@
+<div class="container mt-5">
+    <h1 class="text-center">{{restaurante.nome}}</h1>
+    <p class="text-center">{{restaurante.descricao}}</p>
+
+    <div class="row">
+        {{#each cardapio}}
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{this.imagem}}" class="card-img-top" alt="{{this.nome}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.nome}}</h5>
+                    <p class="card-text">Preço: R$ {{this.preco}}</p>
+                    <button class="btn btn-primary add-to-cart" data-id="{{this.id}}" data-nome="{{this.nome}}" data-preco="{{this.preco}}" data-restaurante_id="{{this.restaurante_id}}">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div id="carrinho-container" class="container mt-4">
+        <h4 class="text-center">Carrinho</h4>
+        <ul id="lista-carrinho" class="list-group mb-3"></ul>
+        <p id="total-carrinho" class="text-end fw-bold" style="display: none;">Total: R$ 0.00</p>
+        <button id="finalizar-compra" class="btn btn-success w-30" style="display: none;">Finalizar Compra</button>
+    </div>
+</div>
+
+<script>
+    let carrinho = [];
+
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', () => {
+            const id = button.dataset.id;
+            const nome = button.dataset.nome;
+            const preco = parseFloat(button.dataset.preco);
+            const restaurante_id = button.dataset.restaurante_id;
+
+            const itemExistente = carrinho.find(item => item.id === id);
+            if (itemExistente) {
+                itemExistente.quantidade++;
+            } else {
+                carrinho.push({ id, nome, preco, quantidade: 1, restaurante_id });
+            }
+
+            atualizarCarrinho();
+        });
+    });
+
+    function atualizarCarrinho() {
+        const listaCarrinho = document.getElementById("lista-carrinho");
+        const totalCarrinho = document.getElementById("total-carrinho");
+        listaCarrinho.innerHTML = "";
+
+        let total = 0;
+
+        carrinho.forEach((item, index) => {
+            const li = document.createElement("li");
+            li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+            li.innerHTML = `
+                <span>${item.nome} - R$ ${item.preco.toFixed(2)} x ${item.quantidade}</span>
+                <div>
+                    <button class="btn btn-sm btn-outline-danger menos" data-index="${index}">➖</button>
+                    <button class="btn btn-sm btn-outline-success mais" data-index="${index}">➕</button>
+                </div>
+            `;
+            listaCarrinho.appendChild(li);
+            total += item.preco * item.quantidade;
+        });
+
+        if (carrinho.length > 0) {
+            totalCarrinho.style.display = "block";
+            totalCarrinho.textContent = `Total: R$ ${total.toFixed(2)}`;
+            document.getElementById("finalizar-compra").style.display = "block";
+        } else {
+            totalCarrinho.style.display = "none";
+            document.getElementById("finalizar-compra").style.display = "none";
+        }
+
+        document.querySelectorAll(".menos").forEach(btn => {
+            btn.removeEventListener("click", () => {});
+            btn.addEventListener("click", () => {
+                const index = btn.dataset.index;
+                if (carrinho[index].quantidade > 1) {
+                    carrinho[index].quantidade--;
+                } else {
+                    carrinho.splice(index, 1);
+                }
+                atualizarCarrinho();
+            });
+        });
+
+        document.querySelectorAll(".mais").forEach(btn => {
+            btn.removeEventListener("click", () => {});
+            btn.addEventListener("click", () => {
+                const index = btn.dataset.index;
+                carrinho[index].quantidade++;
+                atualizarCarrinho();
+            });
+        });
+    }
+
+    document.getElementById("finalizar-compra").addEventListener("click", async () => {
+        const restaurante_id = carrinho[0]?.restaurante_id;
+        const nomeUsuario = "Rian";
+        const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+
+        if (!restaurante_id || carrinho.length === 0) {
+            alert("Erro ao identificar o pedido.");
+            return;
+        }
+
+        try {
+            const response = await fetch("/usuario/cardapio/pedido", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    restaurante_id,
+                    usuario_id: 1,
+                    nomeUsuario,
+                    total,
+                    itens: carrinho
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message);
+                carrinho = [];
+                atualizarCarrinho();
+            } else {
+                alert(`Erro: ${data.message}`);
+            }
+        } catch (error) {
+            console.error("Erro ao finalizar a compra:", error);
+            alert("Erro ao finalizar a compra. Tente novamente.");
+        }
+    });
+</script>

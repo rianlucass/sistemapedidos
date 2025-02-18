@@ -36,5 +36,4 @@ router.get('/restaurante/perfil', (req, res) => {
     res.render('restaurante/perfil')
 })
 
-
 export default router

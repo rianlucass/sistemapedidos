@@ -28,9 +28,6 @@ const Restaurante = banco.sequelize.define('restaurantes',{
         type: banco.Sequelize.TEXT,
         allowNull: false
     },
-    banner: {
-        type: banco.Sequelize.STRING,
-    },
     logo: {
         type: banco.Sequelize.STRING,
     },
