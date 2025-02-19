@@ -2,37 +2,47 @@
     <h1 class="text-center mb-4">Perfil do Restaurante</h1>
 
     <div class="card p-4 shadow-sm">
-        <h2 class="mb-3">Informações do Restaurante</h2>
+        <h2 class="mb-3">Editar Informações do Restaurante</h2>
 
-        <div class="mb-3">
-            <label class="form-label">Nome</label>
-            <p>{{restaurante.nome}}</p>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">CNPJ</label>
-            <p>{{restaurante.cnpj}}</p>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Descrição</label>
-            <p>{{restaurante.descricao}}</p>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Logo do Restaurante</label>
-            <p><img src="{{restaurante.logo}}" alt="Logo" class="img-thumbnail" style="width: 100px;"></p>
-        </div>
-
-        <h2 class="mb-3 mt-4">Atualizar Logo e Banner</h2>
         <form action="/restaurante/perfil/atualizar" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" value="{{restaurante.nome}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="cnpj" class="form-label">CNPJ</label>
+                <input type="text" class="form-control" id="cnpj" name="cnpj" value="{{restaurante.cnpj}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" name="descricao" rows="3">{{restaurante.descricao}}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{restaurante.email}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Logo do Restaurante</label>
+                <p>
+                    {{#if restaurante.logo}}
+                        <img src="{{restaurante.logo}}" alt="Logo" class="img-thumbnail" style="width: 100px;">
+                    {{else}}
+                        <span class="text-muted">Nenhuma logo cadastrada</span>
+                    {{/if}}
+                </p>
+            </div>
+
+            <h2 class="mb-3 mt-4">Atualizar Logo</h2>
             <div class="mb-3">
                 <label for="logo" class="form-label">Logo do Restaurante</label>
                 <input type="file" class="form-control" id="logo" name="logo" accept="image/*">
-                <p>Logo atual: <img src="{{restaurante.logo}}" alt="Logo" class="img-thumbnail" style="width: 100px;"></p>
             </div>
 
-            <button type="submit" class="btn btn-primary">Atualizar</button>
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
         </form>
     </div>
 </div>

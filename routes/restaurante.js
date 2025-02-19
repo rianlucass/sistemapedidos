@@ -31,12 +31,9 @@ router.get('/restaurante/cardapio', (req, res) => {
 
 router.post('/restaurante/cardapio/salvar',upload.single('imagem'), CardapioController.salvar)
 
-router.get('/restaurante/perfil', (req, res) => {
-    if (!req.user) {
-        return res.redirect('restaurante/login')
-    }
-    res.render('restaurante/perfil')
-})
+router.get('/restaurante/perfil', RestauranteController.perfil)
+
+router.post('/restaurante/perfil/atualizar', upload.single('logo'), RestauranteController.atualizarPerfil)
 
 router.post('/restaurante/cardapio/editar/:id', CardapioController.editar)
 

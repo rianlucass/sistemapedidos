@@ -76,6 +76,63 @@ class RestauranteController {
         })
     }
 
+    perfil = async (req, res) => {
+        try {
+            if (!req.user) {
+                return res.redirect('/restaurante/login')
+            }
+    
+            const restaurante = await Restaurante.findByPk(req.user.id)
+    
+            if (!restaurante) {
+                req.flash('error_msg', 'Restaurante não encontrado!')
+                return res.redirect('/')
+            }
+    
+            res.render('restaurante/perfil', { restaurante })
+        } catch (error) {
+            console.error(error)
+            req.flash('error_msg', 'Erro ao carregar perfil do restaurante.')
+            res.redirect('/')
+        }
+    }
+
+    atualizarPerfil = async (req, res) => {
+        try {
+            const restauranteId = req.user.id;
+            const restaurante = await Restaurante.findByPk(restauranteId);
+    
+            if (!restaurante) {
+                req.flash('error_msg', 'Restaurante não encontrado!');
+                return res.redirect('/restaurante/perfil');
+            }
+    
+            // Atualiza os outros campos do formulário
+            restaurante.nome = req.body.nome;
+            restaurante.cnpj = req.body.cnpj;
+            restaurante.descricao = req.body.descricao;
+            restaurante.email = req.body.email;
+    
+            if (req.file) {
+                if (restaurante.logo) {
+                    const oldPath = path.join('public/uploads/restaurante', path.basename(restaurante.logo));
+                    if (fs.existsSync(oldPath)) {
+                        fs.unlinkSync(oldPath);
+                    }
+                }
+                restaurante.logo = `/uploads/${req.file.filename}`;
+            }
+    
+            await restaurante.save();
+    
+            req.flash('success_msg', 'Perfil atualizado com sucesso!');
+            res.redirect('/restaurante/perfil');
+        } catch (error) {
+            console.error(error);
+            req.flash('error_msg', 'Erro ao atualizar o perfil!');
+            res.redirect('/restaurante/perfil');
+        }
+    }    
 }
 
 export default new RestauranteController()
