@@ -58,7 +58,7 @@ class PedidoController {
     
     listarPedidosPorRestaurante = async (req, res) => {
         try {
-            const restaurante_id = req.user.id // ID do restaurante logado
+            const restaurante_id = req.user.id
     
             if (!restaurante_id) {
                 req.flash("error_msg", "ID do restaurante obrigatório.")
@@ -80,4 +80,4 @@ class PedidoController {
     
 }
 
-export default new PedidoController();
+export default new PedidoController()
