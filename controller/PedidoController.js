@@ -56,26 +56,28 @@ class PedidoController {
         }
     }
     
-    listarPedidosPorUsuario = async (req, res) => {
+    listarPedidosPorRestaurante = async (req, res) => {
         try {
-            const { usuario_id } = req.params;
+            const restaurante_id = req.user.id // ID do restaurante logado
     
-            if (!usuario_id) {
-                return res.status(400).json({ message: "ID do usuário obrigatório." });
+            if (!restaurante_id) {
+                req.flash("error_msg", "ID do restaurante obrigatório.")
+                return res.redirect("/restaurante/login");
             }
     
             const pedidos = await Pedido.findAll({
-                where: { usuario_id },
-                include: [{ model: PedidoItens, as: "itens" }]
+                where: { restaurante_id },
+                include: { model: PedidoItens, as: "itens" }
             });
     
-            return res.status(200).json(pedidos);
+            res.render("restaurante/dashboard", { restaurante: req.user, pedidos })
         } catch (error) {
-            console.error("Erro ao buscar pedidos:", error);
-            return res.status(500).json({ message: "Erro ao buscar pedidos." });
+            console.error("Erro ao buscar pedidos:", error)
+            req.flash("error_msg", "Erro ao buscar pedidos.")
+            res.redirect("/restaurante/dashboard")
         }
     }
-
+    
 }
 
 export default new PedidoController();

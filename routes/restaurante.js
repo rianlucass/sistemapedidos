@@ -20,9 +20,12 @@ router.post('/restaurante/login', RestauranteController.login)
 
 router.get('/logout', RestauranteController.logout)
 
+/*
 router.get('/restaurante/dashboard', restauranteAutenticacao, (req, res) => {
     res.render('restaurante/dashboard', {restaurante: req.user})
-})
+})*/
+
+router.get('/restaurante/dashboard', restauranteAutenticacao, PedidoController.listarPedidosPorRestaurante);
 
 router.get('/restaurante/cardapio', (req, res) => {
     if (!req.user) {
@@ -43,7 +46,5 @@ router.get('/restaurante/perfil', (req, res) => {
 router.post('/restaurante/cardapio/editar/:id', CardapioController.editar)
 
 router.post('/restaurante/cardapio/excluir/:id', CardapioController.excluir)
-
-router.get('/usuario/pedidos/:usuario_id', PedidoController.listarPedidosPorUsuario)
 
 export default router
