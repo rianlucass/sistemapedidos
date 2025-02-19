@@ -20,7 +20,7 @@ router.post('/restaurante/login', RestauranteController.login)
 
 router.get('/logout', RestauranteController.logout)
 
-router.get('/restaurante/dashboard', restauranteAutenticacao, PedidoController.listarPedidosPorRestaurante);
+router.get('/restaurante/dashboard', restauranteAutenticacao, PedidoController.listarPedidosPorRestaurante)
 
 router.get('/restaurante/cardapio', (req, res) => {
     if (!req.user) {

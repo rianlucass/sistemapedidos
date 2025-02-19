@@ -15,3 +15,7 @@ Pedido_itens: id, pedido_id, prato_id, nome_prato, preco, quantidade
 /usuario/caradapio/:id  → Exibir cardapio do restaurante escolhido
 /restaurante/cadastro   → Cadastro de restaurantes
 /restaurante/dashboard  → Gerenciar pedidos e cardápio
+
+### IMAGENS PARA FACILITAR NO CADASTRO
+
+diretorio  → /img_para_cadastrar
