@@ -73,5 +73,3 @@ Este sistema permite o cadastro, edição e exclusão de pedidos, integrando fun
 Este projeto está sob a licença [MIT](LICENSE).
 
 ---
-
-Sinta-se à vontade para ajustar este `README.md` conforme as especificidades do seu projeto. Se precisar de ajuda para personalizar ainda mais ou adicionar detalhes específicos, estou à disposição!
